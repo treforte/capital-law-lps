@@ -9,6 +9,7 @@ One folder per ad group at the repo root. No build step — deployed via GitHub 
 | Ad group | URL |
 |----------|-----|
 | Brand | https://treforte.github.io/capital-law-lps/brand/ |
+| Premises Liability | https://treforte.github.io/capital-law-lps/premises-liability/ |
 
 ## Adding a new landing page
 
