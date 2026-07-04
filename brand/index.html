@@ -54,7 +54,7 @@ a{color:inherit}
 .hero{background:linear-gradient(155deg,var(--navy) 0%,var(--navy-2) 60%,var(--navy-3) 100%);position:relative;overflow:hidden;padding:64px 32px 0}
 .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 85% 10%,rgba(198,163,116,.10),transparent 45%)}
 .hero-inner{position:relative;z-index:1;max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
-.hero-left{flex:1.15}
+.hero-left{flex:1.15;position:relative;z-index:5}
 .hero h1{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(36px,5.4vw,60px);color:var(--white);line-height:1.1;margin-bottom:22px}
 .hero-sub{color:rgba(255,255,255,.78);font-size:17px;line-height:1.85;margin-bottom:30px;max-width:530px}
 .check-list{display:flex;flex-direction:column;gap:13px;margin-bottom:34px}
@@ -66,10 +66,10 @@ a{color:inherit}
 .hero-cta-note{color:rgba(255,255,255,.55);font-size:13.5px;font-weight:500}
 
 /* HERO TEAM PHOTO */
-.hero-team{display:none;flex-shrink:0;align-self:flex-end;width:300px;margin:0 -36px 0 -12px;z-index:2;pointer-events:none}
-.hero-team img{width:100%;height:auto;display:block;filter:drop-shadow(-8px 10px 30px rgba(0,0,0,.5))}
-.hero-team-mobile{display:flex;justify-content:center;margin:-6px 0 -18px;pointer-events:none}
-.hero-team-mobile img{width:220px;max-width:70%;height:auto;filter:drop-shadow(0 12px 24px rgba(0,0,0,.5))}
+.hero-team{display:none;flex-shrink:0;align-self:flex-end;width:380px;margin:0 -70px 0 -16px;z-index:4;pointer-events:none}
+.hero-team img{width:100%;height:auto;display:block;filter:drop-shadow(-10px 12px 34px rgba(0,0,0,.55))}
+.hero-team-mobile{display:flex;justify-content:center;margin:-10px 0 -22px;pointer-events:none}
+.hero-team-mobile img{width:320px;max-width:82%;height:auto;filter:drop-shadow(0 14px 28px rgba(0,0,0,.5))}
 
 /* FORM CARD */
 .form-wrap{display:flex;flex-direction:column;align-items:center;position:relative;z-index:3}
@@ -250,21 +250,22 @@ footer .fname{color:rgba(255,255,255,.75);font-family:'Playfair Display',serif;f
   .award-badge:last-child{border-bottom:none}
   .results-top{flex-direction:column;text-align:center}
 }
-@media(max-width:899px){
+@media(max-width:1199px){
   body{padding-bottom:calc(66px + env(safe-area-inset-bottom))}
 }
-@media(min-width:640px){
+@media(min-width:1200px){
   .hero-inner{flex-direction:row;align-items:flex-end}
   .form-wrap{flex-shrink:0}
-}
-@media(min-width:900px){
   .float-bar{display:none}
   .hero-team{display:block}
   .hero-team-mobile{display:none}
   body{padding-bottom:0}
 }
-@media(min-width:900px) and (max-width:1180px){
-  .hero-team{width:230px;margin:0 -20px 0 -8px}
+@media(min-width:1200px) and (max-width:1439px){
+  .hero-team{width:300px;margin:0 -50px 0 -12px}
+}
+@media(min-width:1440px){
+  .hero-team{width:420px;margin:0 -84px 0 -18px}
 }
 </style>
 </head>
