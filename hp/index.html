@@ -295,6 +295,17 @@ section{padding:88px 0}
 .on-dark-sec .sec-head p{color:#B7C1CC}
 
 /* ---------- Results ---------- */
+/* ---- Ornamental divider between light sections ---- */
+.sec-divider{display:flex;align-items:center;justify-content:center;gap:18px;
+  max-width:1180px;margin:0 auto;padding:0 24px}
+.sec-divider .ln{flex:1;height:1px;max-width:340px;
+  background:linear-gradient(90deg,transparent,rgba(198,163,116,.55),transparent)}
+.sec-divider .dot{width:16px;height:16px;color:var(--gold);flex:none;display:grid;place-items:center}
+.sec-divider .dot svg{width:100%;height:100%}
+/* the divider supplies the breathing room, so trim the doubled section padding */
+.vfeature{padding-bottom:clamp(34px,5vw,60px)}
+.sec-divider + section{padding-top:clamp(34px,5vw,60px)}
+
 /* ---- Results section w/ rotating b-roll background ---- */
 .results-sec{position:relative;overflow:hidden;isolation:isolate;
   background:linear-gradient(180deg,#0B1727 0%,var(--ink) 45%,#0B1727 100%)}
@@ -824,12 +835,42 @@ footer.site a:hover{color:var(--white)}
 </div>
 
 <!-- ============ RESULTS (with B-roll background) ============ -->
-<!-- B-ROLL NOTE: these are SharePoint/Stream embeds. They require the files to be shared
-     "Anyone with the link" or viewers will hit a Microsoft login wall. They also will not
-     autoplay silently. For a true background loop, swap each .bframe iframe for:
-     <video src="/assets/broll-1.mp4" autoplay muted loop playsinline></video>
-     The navy gradient base below is intentional: if a frame fails to load, the section
-     still reads as a designed panel rather than a broken embed. -->
+<!-- ============================================================================
+     B-ROLL BACKGROUND — WHY THE VIDEOS SHOW A THUMBNAIL BUT DON'T PLAY
+     ----------------------------------------------------------------------------
+     Three things block playback, and none of them are fixable with a SharePoint embed:
+
+     1. SharePoint / Stream embeds are CLICK-TO-PLAY BY DESIGN. They render a poster
+        frame + play button and ignore autoplay parameters for embedded playback.
+        There is no supported "muted autoplay" flag for background use.
+     2. This layer is pointer-events:none (required, or it would swallow clicks meant
+        for the settlement cards), so the play button can't be clicked either.
+     3. Even without 1 and 2, a cross-origin iframe can't be muted by the parent page,
+        and every browser blocks unmuted autoplay. Background video must be a
+        first-party <video muted> element or a player that accepts a mute flag.
+
+     Also still true: unless each file is shared "Anyone with the link," logged-out
+     visitors get a Microsoft login wall instead of even the thumbnail.
+
+     ----------------------------------------------------------------------------
+     FIX — pick one. Both are drop-in: replace ONLY the <iframe> inside each .bframe.
+     The CSS already styles `.results-media video` and `.results-media iframe`
+     identically, so nothing else changes.
+
+     OPTION A (best quality, needs the MP4s exported + hosted):
+       <video src="/assets/broll-1.mp4" autoplay muted loop playsinline
+              preload="metadata" poster="/assets/broll-1.jpg"></video>
+
+     OPTION B (no hosting needed — upload each clip as an UNLISTED YouTube video;
+     the site already embeds YouTube for testimonials, so nothing new to maintain):
+       <iframe src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&loop=1&playlist=VIDEO_ID&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1"
+               frameborder="0" allow="autoplay; encrypted-media"
+               tabindex="-1" aria-hidden="true"></iframe>
+       (note: `loop` only works on YouTube when `playlist` repeats the same VIDEO_ID)
+
+     Until then the section degrades gracefully — rotating poster stills over the
+     navy gradient, which is why it still looks intentional rather than broken.
+     ============================================================================ -->
 <section class="on-dark-sec results-sec">
   <div class="results-media" aria-hidden="true">
       <div class="bframe is-on" data-broll="0">
@@ -900,6 +941,13 @@ footer.site a:hover{color:var(--white)}
     </div>
   </div>
 </section>
+
+<!-- ============ SECTION DIVIDER ============ -->
+<div class="sec-divider reveal" aria-hidden="true">
+  <span class="ln"></span>
+  <span class="dot"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l3.2 5.8L21 12l-5.8 3.2L12 21l-3.2-5.8L3 12l5.8-3.2L12 3Z" fill="currentColor" opacity=".9"/></svg></span>
+  <span class="ln"></span>
+</div>
 
 <!-- ============ PRACTICE AREAS (WHAT HAPPENED TO YOU) ============ -->
 <section>
